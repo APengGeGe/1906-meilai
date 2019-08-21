@@ -1,23 +1,34 @@
 <template>
   <div class="container">
     <header>
-        <van-nav-bar
-          title="我的"
-          right-text="返回"
-
-          left-arrow
-
-        />
+      <div>
+        <span>我的</span>
+        <van-icon name="setting" />
+        <van-icon name="weapp-nav" />
+      </div>
     </header>
   </div>
 </template>
 
 <script>
 export default {
-    name:'myself'
+    name:'myself',
+    data(){
+      return {
+
+      }
+    },
+    methods:{
+      axios({
+        url:'http://api.cat-shop.penkuoer.com/api/v1/users/info'
+      })
+    }
 }
 </script>
 
-<style>
+<style scoped>
+header div{
+  text-align: center;
+}
 
 </style>
