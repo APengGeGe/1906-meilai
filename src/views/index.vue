@@ -120,14 +120,18 @@
 
     <footer>
       <van-tabbar v-model="active">
-        <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+        <van-tabbar-item icon="home-o" to="home">首页</van-tabbar-item>
         <van-tabbar-item icon="expand">菜品</van-tabbar-item>
         <van-tabbar-item icon="wap-nav">常用清单</van-tabbar-item>
-        <van-tabbar-item icon="shopping-cart" to="./cart">购物车</van-tabbar-item>
-        <van-tabbar-item icon="manager">我的</van-tabbar-item>
+        <van-tabbar-item icon="shopping-cart"  to="./cart">购物车</van-tabbar-item>
+        <van-tabbar-item icon="manager" to="myself">我的</van-tabbar-item>
       </van-tabbar>
     </footer>
+
+      <router-view></router-view>
   </div>
+
+
 </template>
 
 <script>

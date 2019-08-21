@@ -14,12 +14,21 @@ export default new Router({
     {
       path:'/index',
       name:'index',
-      component:()=>import('../views/index')
+
+      component:()=>import('../views/index'),
+      children:[
+        {
+          path:'/home',
+          redirect:'/index',
+          name:'home',
+          component:()=>import('../views/home')
+        }
+      ]
     },
     {
-      path:'./cart',
-      name:'cart',
-      component:()=>import('../views/cart')
+      path:'/myself',
+      name:'myself',
+      component:()=>import('../views/myself.vue')
     }
   ]
 })
