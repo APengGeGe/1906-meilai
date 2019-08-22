@@ -39,6 +39,11 @@ export default new Router({
       path:'/myself',
       name:'myself',
       component:()=>import('../views/myself.vue')
+    },
+    {
+      path:'/setting',
+      name:'setting',
+      component:()=>import('../views/setting.vue')
     }
   ]
 })

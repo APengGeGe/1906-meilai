@@ -12,6 +12,9 @@ export  default {
   },
   myself:params=>{
     return API.POST('/user/mine',params)
+  },
+  recharge:params=>{
+    return API.POST('/user/recharge',params)
   }
 
 }

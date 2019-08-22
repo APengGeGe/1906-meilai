@@ -4,7 +4,7 @@
       <van-nav-bar
         title="我的"
         left-text="返回"
-        right-text="按钮"
+        right-text="设置"
         left-arrow
         @click-left="onClickLeft"
         @click-right="onClickRight"
@@ -69,7 +69,8 @@
                 <div @click="tap(200)">200</div>
                 <div @click="tap(100)">100</div>
                 其他数额：<input type="text"  v-model="number">
-                <button @click="tab(number)">确定</button>
+                <van-button type="primary" @click="tab(number)">主要按钮</van-button>
+                                                    <!--       确定充值 弹出框为完善               -->
           </div>
 
 
@@ -104,7 +105,7 @@
 
 <script>
 import  api from '../api/api_pro'
-
+let id = localStorage.getItem('token')
 export default {
     name:'myself',
     data(){
@@ -125,6 +126,11 @@ export default {
       tab(number){
         console.log(number)
 
+        let params = {balance:number,id:id}
+        console.log(params)
+        api.recharge(params).then((res)=>{
+          console.log(res)
+        })
       },
       onClickLeft(){
         this.$router.go(-1)
@@ -216,5 +222,8 @@ section .yue{
   font-size: 25px;
   float: left;
   margin-left: 10px;
+}
+.chongzhi input{
+  margin-top: 10px;
 }
 </style>
