@@ -3,7 +3,7 @@ var Mock = require('mockjs')
 var data = Mock.mock({
   "list|3":[
     {
-      "name":"@cname",
+      "name":"@cname()",
     }
   ]
 })
