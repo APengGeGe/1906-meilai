@@ -36,31 +36,51 @@
             </div>
 
             <div class="indent">
+              <router-link tag="h2" to="">我的订单</router-link>
               <ul>
                 <router-link tag="li" to="">
-                  <van-icon name="credit-pay" />
+                  <van-icon name="credit-pay" size=30 />
                   <p>待付款</p>
                 </router-link>
                 <router-link tag="li" to="">
-                  <van-icon name="credit-pay" />
-                  <p>代发货</p>
+                  <van-icon name="credit-pay" size=30  />
+                  <p>待发货</p>
                 </router-link>
                 <router-link tag="li" to="">
-                  <van-icon name="credit-pay" />
+                  <van-icon name="credit-pay" size=30  />
                   <p>待收货</p>
                 </router-link>
                 <router-link tag="li" to="">
-                  <van-icon name="credit-pay" />
+                  <van-icon name="credit-pay" size=30  />
                   <p>已收货</p>
                 </router-link>
-                 <router-link tag="li" to="">
-                  <van-icon name="credit-pay" />
+                <router-link tag="li" to="">
+                  <van-icon name="credit-pay" size=30  />
                   <p>售后服务</p>
                 </router-link>
               </ul>
             </div>
+
+
+          <div class="chongzhi">
+                <router-link tag="h2" to="">在线充值</router-link>
+                <div @click="tap(500)">500</div>
+                <div @click="tap(300)">300</div>
+                <div @click="tap(200)">200</div>
+                <div @click="tap(100)">100</div>
+                其他数额：<input type="text"  v-model="number">
+                <button @click="tab(number)">确定</button>
+          </div>
+
+
         </div>
 
+
+
+
+
+
+                  <!--          未完善          -->
 
         <div class="notoken" ref="notoken">
               没有token
@@ -68,6 +88,16 @@
 
     </section>
 
+
+        <footer>
+          <van-tabbar v-model="active">
+            <van-tabbar-item icon="home-o" to="home">首页</van-tabbar-item>
+            <van-tabbar-item icon="expand">菜品</van-tabbar-item>
+            <van-tabbar-item icon="wap-nav">常用清单</van-tabbar-item>
+            <van-tabbar-item icon="shopping-cart"  to="./cart">购物车</van-tabbar-item>
+            <van-tabbar-item icon="manager" to="myself">我的</van-tabbar-item>
+          </van-tabbar>
+        </footer>
 
   </div>
 </template>
@@ -83,9 +113,19 @@ export default {
         yue:'0.00',
         qian:'0.00',
         you:'0.00',
+        active:0,
+        number:'',
       }
     },
     methods:{
+      tap(num){
+        console.log(num)
+        this.number  = num
+      },
+      tab(number){
+        console.log(number)
+
+      },
       onClickLeft(){
         this.$router.go(-1)
       },
@@ -149,7 +189,7 @@ section .yue{
 }
 
 .indent{
-  height: 60px;
+  height: 120px;
   background: #ccc;
   margin-top: 20px;
 }
@@ -158,6 +198,23 @@ section .yue{
   width: 60px;
   float: left;
   text-align: center;
+  margin-left: 10px;
+  line-height: 26px;
+}
+
+
+.chongzhi h2{
+  border-bottom:1px solid  #ccc;
+}
+.chongzhi div{
+  width: 80px;
+  height: 45px;
+  border: 1px solid  greenyellow;
+  color:greenyellow;
+  line-height: 45px;
+  text-align: center;
+  font-size: 25px;
+  float: left;
   margin-left: 10px;
 }
 </style>
