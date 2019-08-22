@@ -5,9 +5,13 @@ export  default {
     return API.POST('/api/v1/admin/products',params)
   },
   login:params=>{
-    return API.POST('/api/v1/auth/login',params)
+    return API.POST('/user/login',params)
   },
-  getRegister:params=>{
-    return API.POST('/api/v1/auth/reg',params)
+  register:params=>{
+    return API.POST('/user/register',params)
+  },
+  myself:params=>{
+    return API.POST('/user/mine',params)
   }
+
 }

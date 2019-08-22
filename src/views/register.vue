@@ -24,25 +24,23 @@
           placeholder="请输入密码"
           required
         />
+
       </van-cell-group>
-      <van-uploader v-model="fileList" multiple />
 
       <van-button type="primary" @click="register">注册</van-button>
   </div>
 </template>
 
 <script>
-// import api from '../api/api_pro'
-import axios from 'axios'
+import api from '../api/api_pro'
+// import axios from 'axios'
 export default {
   name:'register',
   data(){
     return{
         username:'',
         password:'',
-        fileList:[{
-          url:''
-        }]
+
     }
   },
   methods:{
@@ -50,23 +48,15 @@ export default {
       let params = {
         phonenum:this.username,
         password:this.password,
-
       }
-      // console.log(params)
-      // api.getRegister(params).then((data)=>{
-      //   console.log(data)
-      // })
-        axios({
-          method:'post',
-          url:'http://106.12.52.107:8081/MeledMall/user/register',
-          params:params
-        }).then((data)=>{
-          alert(data.data.info)
-          if(data.data.code=== 1 ){
-            this.$router.push('/login')
-          }
-        })
+      console.log(params)
+      api.register(params).then((data)=>{
+        console.log(data)
+        if(data.code===1){
 
+          this.$router.push('/login')
+        }
+      })
 
     },
 

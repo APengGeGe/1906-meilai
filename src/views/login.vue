@@ -35,24 +35,17 @@ export default {
   methods: {
     login() {
       let params = {
-        userName:this.username,
+        phonenum:this.username,
         password:this.password,
       };
+      console.log(params)
       api.login(params).then((data) => {
         console.log(data);
+        if(data.code===1){
+          localStorage.setItem('token',data.info.id)
+          this.$router.push('/index')
+        }
       });
-
-      // axios({
-      //   method:'post',
-      //   url:'http://api.cat-shop.penkuoer.com/api/v1/auth/login',
-      //   dataType:'json',
-      //   params:params
-      // }).then((res)=>{
-      //   console.log(res)
-      //   if(res.data.code === 1){
-      //     this.$router.push('/index')
-      //   }
-      // })
 
     }
   }
