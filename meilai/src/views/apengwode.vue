@@ -1,6 +1,6 @@
 <template>
   <div>
-    我的
+    <div>欢迎：{{this.$store.state.username}}</div>
   </div>
 </template>
 
@@ -17,5 +17,5 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 </style>

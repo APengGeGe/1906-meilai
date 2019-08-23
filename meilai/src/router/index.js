@@ -10,7 +10,7 @@ import Qing from '@/views/apengqingdan'
 import Gou from '@/views/apenggouwu'
 import Wo from '@/views/apengwode'
 import De from '@/views/apengdetail'
-
+import Suo from '@/views/apengshousuo'
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +30,10 @@ export default new Router({
     {
       path: '/detail/:id',
       component:De
+    },
+    {
+      path: '/apengshousuo',
+      component:Suo
     },
     {
       path: '/apengshouye',

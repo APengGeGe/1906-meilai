@@ -1,6 +1,6 @@
 <template>
   <div>
-    home
+    <div>欢迎：{{this.$store.state.username}}</div>
      <van-button type="primary" @click="top()" >点击</van-button>
       </div>
   </div>

@@ -9,10 +9,14 @@ import "lib-flexible/flexible"
 import { Lazyload } from 'vant';
 import store from "./store"
 
+
+
+
 // options 为可选参数，无则不传
 Vue.use(Lazyload);
 Vue.use(Vant)
 Vue.config.productionTip = false
+
 
 /* eslint-disable no-new */
 new Vue({

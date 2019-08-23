@@ -18,7 +18,6 @@
           /> -->
 
     <van-card
-        :num="num"
         :price="item.price"
         :desc="item.desc"
         :title="item.name"
@@ -26,9 +25,12 @@
       >
         <div slot="tags">
           <van-tag plain type="danger" >菜品</van-tag>
+          <div slot="footer">
+                <van-stepper v-model="addValue" />
+          </div>
         </div>
         <div slot="footer">
-          <van-button size="mini" @click="gou(item.id,item.photo,item.name,item.price)">加入购物车</van-button>
+          <van-button size="mini" @click="gou()">加入购物车</van-button>
         </div>
       </van-card>
   </div>
@@ -40,10 +42,38 @@ export default {
   name:"apengdetail",
   data(){
     return{
+        addValue:'',
         item:[],
-        num:""
     }
   },
+  methods:{
+    gou(){
+        if(localStorage.getItem("token")==null){
+            this.$toast('请先登录')
+        }else{
+            let uid =localStorage.getItem('token')
+            console.log(uid)
+            // console.log(this.item.id)
+            // console.log(this.item.name)
+            // console.log(this.item.photo)
+            // console.log(this.item.price)
+            axios({
+              method:"post",
+              url:"http://106.12.52.107:8081/MeledMall/shopCar/addShopCar",
+              params:{uid:uid,mid:this.item.id,mname:this.item.name,mphoto:this.item.photo,mprice:this.item.price}
+            }).then((data)=>{
+              console.log(data)
+            })
+        }
+      },
+    onClickLeft() {
+      this.$router.go(-1)
+    },
+    onClickRight() {
+      this.$router.push("/apenggouwu")
+    }
+  }
+  ,
   mounted () {
     axios({
       method:"post",
@@ -53,38 +83,10 @@ export default {
       // console.log(data.data.info)
       this.item = data.data.info
     })
-
-  },
-  methods:{
-    gou(){
-
-        if(localStorage.getItem("token")==null){
-            this.$toast('请先登录')
-
-        }else{
-          for(let i=0;i<this.num;i++ ){
-
-         }
-          var uid =localStorage.getItem('token')
-          console.log(uid)
-          axios({
-            method:"post",
-            url:"http://106.12.52.107:8081/MeledMall/shopCar/addShopCar",
-            params:{uid:uid,mid:this.item.id,mname:this.item.name,mphoto:this.item.photo,mprice:this.item.price}
-          }).then((data)=>{
-            console.log(data)
-            console.log(this.item.id)
-          })
-        }
-    },
-    onClickLeft() {
-      this.$router.go(-1)
-    },
-    onClickRight() {
-      this.$router.push("/gouwuche")
-    }
-  },
+  }
 }
 </script>
-<style>
+<style scoped>
+
+
 </style>

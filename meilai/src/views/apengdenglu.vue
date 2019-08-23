@@ -52,11 +52,9 @@ import {mapState,mapActions,mapGetters,mapMutations} from "vuex"
   name:'apengdenglu',
   data(){
     return{
-      imageList: ['http://img4.imgtn.bdimg.com/it/u=1688026885,2773767715&fm=26&gp=0.jpg'
-			      ],
+      imageList: ['http://img4.imgtn.bdimg.com/it/u=1688026885,2773767715&fm=26&gp=0.jpg'],
       username:'',
       password:'',
-
     }
   },
   methods:{
@@ -69,10 +67,11 @@ import {mapState,mapActions,mapGetters,mapMutations} from "vuex"
       }).then((data)=>{
           console.log(data.data.info)
           var date = data.data.info
-          if(data.data.code == 1){
 
+          if(data.data.code == 1){
+              this.$toast('登录成功')
             this.$router.push("/apengshouye")
-            localStorage.setItem("token",JSON.stringify(date))
+            localStorage.setItem("token",JSON.stringify(date.id))
           }else{
              alert("登录失败")
              this.$router.push("/apengzhuce")

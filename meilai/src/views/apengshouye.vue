@@ -2,7 +2,7 @@
   <div id="shou">
       <div id="tou">
          <van-icon name="service-o" class="ic"/>
-        <input type="text" v-model="cha" class="cha1" placeholder="请输入搜索信息"/>
+        <input type="text" v-model="cha" class="cha1" placeholder="请输入搜索信息" @click="ttp()"/>
         <van-icon :name="name" class="ic"/>
 
       </div>
@@ -48,6 +48,9 @@ export default {
     },
     tap(msg){
       this.name=msg
+    },
+    ttp(){
+      this.$router.push("/apengshousuo")
     }
    },
    mounted () {

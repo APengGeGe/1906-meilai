@@ -31,6 +31,7 @@
           class="tit2"
         />
       </van-cell-group>
+
       </div>
       <van-button type="primary" @click="top()" class="de">注册</van-button>
   </div>
@@ -44,6 +45,7 @@ export default {
     return{
       username:'',
       password:'',
+
        imageList: ['http://img3.imgtn.bdimg.com/it/u=956449621,3324153932&fm=26&gp=0.jpg'
 			      ],
     }
@@ -53,13 +55,14 @@ export default {
         axios({
           method:"post",
           url:"http://106.12.52.107:8081/MeledMall/user/register",
-          params:{phonenum:this.username,password:this.password}
+          params:{phonenum:this.username,password:this.password,}
         }).then((data)=>{
-            console.log(data.data)
-            if(data.data.code ==1){
-                this.$router.push("/apengdenglu")
-            }else{
-              alert("注册失败")
+            console.log(data)
+             if(data.data.code ==1){
+               this.$toast('注册成功')
+                 this.$router.push("/apengdenglu")
+             }else{
+               alert("注册失败")
             }
 
         })

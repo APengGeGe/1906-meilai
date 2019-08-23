@@ -41,9 +41,8 @@ export default {
        axios({
         method:"post",
         url:"http://106.12.52.107:8081/MeledMall/menu/parentMenu",
-
       }).then((data)=>{
-        //  console.log(data.data.info)
+         console.log(data.data.info)
          this.list = data.data.info
       })
 
@@ -61,7 +60,7 @@ export default {
           url:"http://106.12.52.107:8081/MeledMall/menu/childMenu",
           params:{id:name}
         }).then((data)=>{
-          console.log(data.data.info)
+          // console.log(data.data.info)
           this.arr=data.data.info
         })
       },

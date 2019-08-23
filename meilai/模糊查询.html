@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        #att{
+            display: none
+        }
+    </style>
+</head>
+<script src="../DEMO1/lib/vue.js"></script>
+<script src="../DEMO1/lib/axios.min.js"></script>
+<body>
+        <div id="app">
+            <input type="text" v-model="value1" @input='tap2()'/>
+            <ul ref="qwe" id="att">
+                <li  v-for="item in show1">{{item.name}}</li>
+            </ul>
+            <p>
+                数据双向绑定原理  数据劫持 订阅者模式 通过 object geters seters 
+                数据发生改变时通知订阅者  observer 监听数据变化  coplited  watcher  mvvm视图
+                核心思想             虚拟DEMO
+                运行速度快 ·        组件化组件视图
+                v-xxx               核心库   丰富的插件
+                {{}}                jsx    简单的模板
+                简单                 比react快
+                父子组件传 :name:"tit"   porps:["name"]   {{name}}
+                子传父 :@parent = "tap" this.$emit("parent",数据) 父tap(msg){变量=接受msg}
+                监听  watch  
+                过滤  filter
+                非父组件 var vm = new Vue({})  vm.$emit("aa",this.title)  接受vm.$on("aa",function(data){})
+                获取父组件  this.#parent()
+                获取子组件  添加 ref="tit"  获取 this.$refs.tit()    
+                
+             </p>
+        </div>
+        <script type="text/javascript">
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    value1:'',
+                    arr:[]
+
+                },
+                methods: { 
+                    tap2(){
+                    //   this.show=true
+                    
+                    //this.bian=!this.bian
+
+                    if(this.value1 ==''){
+                        this.$refs.qwe.style.display = "none"
+                        //this.bian=false;
+                        // this.$refs.tit.style.display = none
+                    }else{
+                        this.$refs.qwe.style.display = "block"
+                    }
+                    console.log(1)
+                    }
+                },
+                mounted () {
+                    axios({
+                    method:'post',
+                    url:'http://106.12.52.107:8081/MeledMall/menu/selectChild',
+                    
+                    }).then((data)=>{
+                        //console.log(data)
+                        this.suo=data.data.info;
+                        this.arr = this.suo
+                        console.log(this.suo)
+                    })
+                },
+                computed:{
+                    show1(){
+                        
+                        let arr1=[];
+                        this.arr.map((item)=>{
+                                if(item.name.search(this.value1)!=-1){
+                                    arr1.push(item)
+                                }
+                                
+                            })
+                        return arr1
+                        
+                    }
+                },
+               
+            })
+        </script>
+</body>
+</html>
