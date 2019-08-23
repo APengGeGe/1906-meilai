@@ -21,5 +21,8 @@ export  default {
   },
   showBanner:params=>{
     return API.POST('/sildeShow/show')                        //轮播
+  },
+  recommend:params=>{
+    return API.POST('/menu/recommend')                        // 为你推荐
   }
 }

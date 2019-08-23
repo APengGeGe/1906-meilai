@@ -14,11 +14,17 @@
       <!--                    轮播       -->
       <van-swipe :autoplay="3000" indicator-color="blue" :touchable="true" :height="200">
         <van-swipe-item>
-          <img src="../img/1.png"  />
+          <img src="../img/1.png" style="width:100vw;height:180px;" />
         </van-swipe-item>
-        <van-swipe-item></van-swipe-item>
-        <van-swipe-item></van-swipe-item>
-        <van-swipe-item></van-swipe-item>
+        <van-swipe-item>
+          <img src="../img/2.png" style="width:100vw;height:180px;" />
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="../img/3.jpg" style="width:100vw;height:180px;" />
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="../img/4.jpg" style="width:100vw;height:180px;" />
+        </van-swipe-item>
       </van-swipe>
 
       <!--             分类                  -->
@@ -69,15 +75,21 @@
 
 
       <div id="tuij">
-          <p>为你推荐</p>
-          <p>我的清单</p>
-          <van-card
-            num="2"
-            price="2.00"
-            desc="描述信息"
-            title="商品标题"
-            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
-          />
+         <van-tabs v-model="activeName">
+            <van-tab title="为你推荐" name="a">
+              <van-card v-for="(i,k) in recommend" :key="k"
+                :price="i.price"
+                :desc="i.desc"
+                :title="i.name"
+                :thumb="i.photo"
+                />
+            </van-tab>
+
+            <van-tab title="我的清单" name="b">
+
+            </van-tab>
+        </van-tabs>
+
 
       </div>
 
@@ -112,6 +124,8 @@ export default {
       hours: "",
       list: [],
       showlist:[],
+      activeName:'',
+      recommend:[],
     };
   },
   methods: {
@@ -124,12 +138,16 @@ export default {
   },
   mounted(){
       api.grtProduct().then((res)=>{
-        console.log(res)
+        //console.log(res)
         this.list = res.info
       }),
       api.showBanner().then((res)=>{
-        console.log(res)
+        //console.log(res)
         this.showlist = res.info
+      }),
+      api.recommend().then((res)=>{
+        console.log(res)
+        this.recommend = res.info
       })
   }
 };
@@ -153,6 +171,9 @@ li {
   margin-left: 12px;
 }
 
+header{
+  background: #ccc;
+}
 header .search {
   width: 70%;
   float: left;
@@ -176,9 +197,7 @@ section {
 
 #menu-wap {
   margin-top: 20px;
-  /* display: flex; */
-  /* justify-content: space-around; */
-  /* flex-wrap: wrap; */
+  background: #ccc;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
