@@ -4,7 +4,7 @@
       <van-nav-bar
         title="我的"
         left-text="返回"
-        right-text="设置"
+        :right-text="set"
         left-arrow
         @click-left="onClickLeft"
         @click-right="onClickRight"
@@ -21,6 +21,7 @@
             <div class="yue">
                 <ul>
                   <li>
+                                               <!--       余额显示BUG          -->
                     <p>{{yue}}</p>
                     <span>余额</span>
                   </li>
@@ -64,13 +65,21 @@
 
           <div class="chongzhi">
                 <router-link tag="h2" to="">在线充值</router-link>
-                <div @click="tap(500)">500</div>
-                <div @click="tap(300)">300</div>
-                <div @click="tap(200)">200</div>
-                <div @click="tap(100)">100</div>
-                其他数额：<input type="text"  v-model="number">
-                <van-button type="primary" @click="tab(number)">主要按钮</van-button>
-                                                    <!--       确定充值 弹出框为完善               -->
+                <div @click="tap(500)" class="div">500</div>
+                <div @click="tap(300)" class="div">300</div>
+                <div @click="tap(200)" class="div">200</div>
+                <div @click="tap(100)" class="div">100</div>
+
+                   <!-- <van-field v-model="number"  /> -->
+                    <van-field
+                      v-model="number"
+                      required
+                      clearable
+                      label="其他数额"
+                      placeholder="请输入金额"
+                    />
+                <van-button type="primary" size="large" @click="tab(number)">确认充值</van-button>
+                                                    <!--       确定充值 弹出框未完善               -->
           </div>
 
 
@@ -81,10 +90,12 @@
 
 
 
-                  <!--          未完善          -->
+
 
         <div class="notoken" ref="notoken">
-              没有token
+            <h2>您还未登陆</h2>
+        <van-button type="primary" size="large"  to="/login">去登陆</van-button>
+
         </div>
 
     </section>
@@ -116,6 +127,8 @@ export default {
         you:'0.00',
         active:0,
         number:'',
+        set:'设置',
+
       }
     },
     methods:{
@@ -136,7 +149,7 @@ export default {
         this.$router.go(-1)
       },
       onClickRight(){
-
+          this.$router.push('/setting')
       }
     },
     mounted(){
@@ -146,10 +159,13 @@ export default {
           this.$refs.notoken.style.display = 'none'
         api.myself({id:token}).then((res)=>{
           console.log(res.info.user.phonenum)
+          console.log(res)
+          this.yue = res.info.user.balance
           this.name = res.info.user.phonenum
         })
 
         }else{
+          this.set = ''
           this.$refs.hastoken.style.display = 'none'
         }
     },
@@ -188,6 +204,7 @@ section .yue{
   line-height: 30px;
   border: 1px solid #ccc;
   margin-top: 20px;
+  text-align: center;
 }
 .yue li{
   float: left;
@@ -212,7 +229,7 @@ section .yue{
 .chongzhi h2{
   border-bottom:1px solid  #ccc;
 }
-.chongzhi div{
+.chongzhi .div{
   width: 80px;
   height: 45px;
   border: 1px solid  greenyellow;

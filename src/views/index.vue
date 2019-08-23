@@ -7,65 +7,31 @@
       <div class="search">
         <van-search placeholder="请输入搜索关键词" v-model="value" />
       </div>
-      <span>
-        <van-icon name="flag-o" />
-      </span>
+
     </header>
 
     <section>
       <!--                    轮播       -->
       <van-swipe :autoplay="3000" indicator-color="blue" :touchable="true" :height="200">
         <van-swipe-item>
-          <img src="../img/1.png" alt />
+          <img src="../img/1.png"  />
         </van-swipe-item>
-        <van-swipe-item>2</van-swipe-item>
-        <van-swipe-item>3</van-swipe-item>
-        <van-swipe-item>4</van-swipe-item>
+        <van-swipe-item></van-swipe-item>
+        <van-swipe-item></van-swipe-item>
+        <van-swipe-item></van-swipe-item>
       </van-swipe>
 
       <!--             分类                  -->
 
       <div id="menu-wap">
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>米面粮油</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>新鲜蔬菜</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>休闲饮酒</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>鲜蛋</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>肉畜</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>米面粮油</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>新鲜蔬菜</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>休闲饮酒</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>鲜蛋</p>
-        </router-link>
-        <router-link tag="div" to class="menu">
-          <div class="menu-img"></div>
-          <p>肉畜</p>
-        </router-link>
+
+        <ul>
+          <router-link tag="li" to=""  v-for="(i,k) in list" :key="k" @click="prolist(i.id)">
+            <img :src="i.photo" >
+            <p>{{i.menu}}</p>
+          </router-link>
+        </ul>
+
       </div>
 
       <div class="miaosha">
@@ -135,7 +101,7 @@
 </template>
 
 <script>
-import axios from "axios";
+ import  api from '../api/api_pro'
 export default {
   name: "index",
   data() {
@@ -144,17 +110,37 @@ export default {
       value: "",
       time: 16549865321654,
       hours: "",
-      list: []
+      list: [],
+      showlist:[],
     };
   },
   methods: {
     onSearch() {},
-    onCancel() {}
+    onCancel() {},
+    prolist(id){
+      this.$router.push('/apengpyou'+id)
+
+    },
+  },
+  mounted(){
+      api.grtProduct().then((res)=>{
+        console.log(res)
+        this.list = res.info
+      }),
+      api.showBanner().then((res)=>{
+        console.log(res)
+        this.showlist = res.info
+      })
   }
 };
 </script>
 
 <style scoped>
+img{
+  width: 60px;
+  height: 60px;
+}
+
 .container {
   height: 100vh;
   display: flex;
@@ -162,8 +148,9 @@ export default {
 }
 
 li {
-  height: 50px;
-  border-top: 80px solid red;
+  height: 120px;
+  float: left;
+  margin-left: 12px;
 }
 
 header .search {
@@ -189,9 +176,9 @@ section {
 
 #menu-wap {
   margin-top: 20px;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* justify-content: space-around; */
+  /* flex-wrap: wrap; */
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
@@ -200,11 +187,14 @@ section {
   text-align: center;
   width: 66px;
 }
+#menu-wap ul{
+  overflow: hidden;
+}
 
 #menu-wap .menu-img {
   width: 60px;
   height: 60px;
-  border: 1px solid red;
+
 }
 
 .miaosha i {

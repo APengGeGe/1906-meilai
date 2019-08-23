@@ -38,12 +38,28 @@ export default new Router({
     {
       path:'/myself',
       name:'myself',
-      component:()=>import('../views/myself.vue')
+      component:()=>import('../views/myself')
     },
     {
       path:'/setting',
       name:'setting',
-      component:()=>import('../views/setting.vue')
+      component:()=>import('../views/setting')
+    },
+    {
+      path:'/anquan',
+      name:'anquan',
+      component:()=>import('../views/anquan')
+    },
+    {
+      path:'/password',
+      name:'password',
+      component:()=>import('../views/password')
+    },
+    {
+      path:'/paren',
+      name:'paren',
+      component:()=>import('../views/paren')
     }
+
   ]
 })

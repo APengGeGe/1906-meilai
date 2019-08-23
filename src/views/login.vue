@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header>
-      <van-nav-bar title="登陆" />
+      <van-nav-bar  :title="title" />
     </header>
     <van-cell-group>
       <van-field
@@ -17,7 +17,7 @@
       <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required />
     </van-cell-group>
 
-    <van-button type="primary" @click="login">登陆</van-button>
+    <van-button type="primary" size="large" @click="login">退出登录</van-button>
   </div>
 </template>
 
@@ -29,7 +29,8 @@ export default {
   data(){
     return{
         username: "",
-        password: ""
+        password: "",
+        title:'登陆'
     }
   },
   methods: {

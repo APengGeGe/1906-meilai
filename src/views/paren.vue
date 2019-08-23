@@ -1,42 +1,34 @@
 <template>
   <div class="container">
-      <header>
+        <header>
           <van-nav-bar
-            title="设置"
+            :title="title"
             left-text="返回"
             left-arrow
             @click-left="onClickLeft"
           />
       </header>
+
       <section>
-        <router-link tag="div" to="/anquan">账户与安全 <van-icon name="arrow" class="icon" /></router-link>
-        <router-link tag="div" to="/paren">修改个人信息 <van-icon name="arrow" class="icon"/></router-link>
-        <router-link tag="div" to="">清除缓存 <van-icon name="arrow"  class="icon" /></router-link>
-        <router-link tag="div" to="">检查更新 <van-icon name="arrow"  class="icon" /></router-link>
-        <van-button type="primary" size="large" @click="tuichu">退出登录</van-button>
+        <router-link tag="div" to="">昵称： <van-icon name="arrow" class="icon" /></router-link>
+        <router-link tag="div" to="">头像 <van-icon name="arrow" class="icon"/></router-link>
+        <router-link tag="div" to="">地址 <van-icon name="arrow"  class="icon" /></router-link>
+        <router-link tag="div" to="">手机号<van-icon name="arrow"  class="icon" /></router-link>
       </section>
-
-
-
-
   </div>
 </template>
 
 <script>
 export default {
-  name:'setting',
+  name:'paren',
   data(){
     return{
-
+      title:'修改个人信息'
     }
   },
   methods:{
     onClickLeft(){
       this.$router.go(-1)
-    },
-    tuichu(){
-      localStorage.removeItem('token')
-      this.$router.push('/index')
     }
   }
 }
