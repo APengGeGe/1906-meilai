@@ -3,7 +3,7 @@
     <div>
       <div>欢迎：{{this.$store.state.username}}</div>
       <van-tabs v-model="active" @click="tap">
-          <   van-card
+          <van-card
             v-for="(item,i) in arr"
             :key="i"
             :price="item.price"
