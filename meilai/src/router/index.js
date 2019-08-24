@@ -107,7 +107,64 @@ const router= new Router({
         },
 
       ]
-    }
+    },
+    {
+      path:'/paren',
+      name:'paren',
+      component:()=>import('../views/paren')
+    },
+    {
+        path:'/setting',
+         name:'setting',
+         component:()=>import('../views/setting')
+       },
+    // {
+    //   path:'/',
+    //   redirect:'/index',
+
+    // },
+    // {
+    //   path:'/login',
+    //   name:'login',
+    //   component:()=>import('../views/login')
+    // },
+    // {
+    //   path:'/register',
+    //   name:'register',
+    //   component:()=>import('../views/register')
+    // },
+    // {
+    //   path:'/index',
+    //   name:'index',
+
+    //   component:()=>import('../views/index'),
+    //   children:[
+    //     {
+    //       path:'/home',
+    //       redirect:'/index',
+    //       name:'home',
+    //       component:()=>import('../views/home')
+    //     }
+    //   ]
+    // },
+    // {
+    //   path:'/myself',
+    //   name:'myself',
+    //   component:()=>import('../views/myself')
+    // },
+    //
+    // {
+    //   path:'/anquan',
+    //   name:'anquan',
+    //   component:()=>import('../views/apengdenglu')
+    // },
+    // {
+    //   path:'/password',
+    //   name:'password',
+    //   component:()=>import('../views/password')
+    // },
+
+
   ]
 })
 

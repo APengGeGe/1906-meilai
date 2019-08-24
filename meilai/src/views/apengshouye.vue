@@ -47,6 +47,12 @@ export default {
       if(url == "#/apenghome"){
         this.$router.push("/apengxiaoxi")
       }
+       if(url == "#/apengshouye"){
+        this.$router.push("/apengxiaoxi")
+      }
+         if(url == "#/apengwode"){
+        this.$router.push("/paren")
+      }
       if(url == "#/apengpyou"){
           this.$router.push("/apengyouhui")
       }
@@ -91,13 +97,14 @@ export default {
   justify-content:center;
   align-items: center;
   position:fixed;
-  top:0;left:0
+  top:0;left:0;
+  z-index: 10;
 }
 #view{
   flex:1;
   margin-top:50px;
   margin-bottom:50px;
-  overflow: auto;
+  overflow:auto;
 
 }
 .ic{
