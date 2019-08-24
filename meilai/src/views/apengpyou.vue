@@ -24,7 +24,6 @@
             @click="tep(item.id)"
           />
 
-
       </van-tab>
 
     </van-tabs>
