@@ -1,10 +1,9 @@
 <template>
   <div id="shou">
       <div id="tou">
-         <van-icon name="service-o" class="ic"/>
+         <van-icon name="service-o" class="ic" @click="ke()"/>
         <input type="text" v-model="cha" class="cha1" placeholder="请输入搜索信息" @click="ttp()"/>
-        <van-icon :name="name" class="ic"/>
-
+        <van-icon :name="name" class="ic" @click="xiao()"/>
       </div>
 
       <div id="view">
@@ -28,17 +27,34 @@
 
 <script>
 export default {
-   name:"apengshouye",
-   data(){
-     return{
-       isLoading: false,
-         active: 0,
-         title:"首页",
-         name:"chat-o",
-         cha:''
-     }
-   },
-   methods:{
+  name:"apengshouye",
+  data(){
+    return{
+        isLoading: false,
+        active: 0,
+        title:"首页",
+        name:"chat-o",
+        cha:''
+    }
+  },
+  methods:{
+    ke(){
+      this.$router.push("/apengkefu")
+    },
+    xiao(){
+      var url = window.location.hash
+      console.log(url)
+      if(url == "#/apenghome"){
+        this.$router.push("/apengxiaoxi")
+      }
+      if(url == "#/apengpyou"){
+          this.$router.push("/apengyouhui")
+      }
+       if(url == "#/apengqingdan"){
+          this.$router.push("/apengyouhui")
+      }
+
+    },
       onRefresh() {
       setTimeout(() => {
         this.$toast('刷新成功');
@@ -52,8 +68,10 @@ export default {
     ttp(){
       this.$router.push("/apengshousuo")
     }
+
    },
    mounted () {
+
 
    }
 }
@@ -79,7 +97,8 @@ export default {
   flex:1;
   margin-top:50px;
   margin-bottom:50px;
-  overflow: auto
+  overflow: auto;
+
 }
 .ic{
   font-size:25px;

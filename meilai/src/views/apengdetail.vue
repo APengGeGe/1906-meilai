@@ -33,6 +33,34 @@
           <van-button size="mini" @click="gou()">加入购物车</van-button>
         </div>
       </van-card>
+
+
+      <van-goods-action class="de">
+        <van-goods-action-icon
+          icon="chat-o"
+          text="客服"
+          @click="tiao1()"
+        />
+        <van-goods-action-icon
+          info="5"
+          icon="cart-o"
+          text="购物车"
+          @click="tiao()"
+        />
+        <van-goods-action-icon
+          icon="shop-o"
+          text="店铺"
+        />
+        <van-goods-action-button
+          type="warning"
+          text="加入购物车"
+          @click="tiao2()"
+        />
+        <van-goods-action-button
+          type="danger"
+          text="立即购买"
+        />
+      </van-goods-action>
   </div>
 </template>
 
@@ -47,6 +75,31 @@ export default {
     }
   },
   methods:{
+    tiao(){
+      this.$router.push("/apenggouwu")
+    },
+     tiao1(){
+      this.$router.push("/apengkefu")
+    },
+     tiao2(){
+        if(localStorage.getItem("token")==null){
+            this.$toast('请先登录')
+        }else{
+            let uid =localStorage.getItem('token')
+            console.log(uid)
+            // console.log(this.item.id)
+            // console.log(this.item.name)
+            // console.log(this.item.photo)
+            // console.log(this.item.price)
+            axios({
+              method:"post",
+              url:"http://106.12.52.107:8081/MeledMall/shopCar/addShopCar",
+              params:{uid:uid,mid:this.item.id,mname:this.item.name,mphoto:this.item.photo,mprice:this.item.price}
+            }).then((data)=>{
+              console.log(data)
+            })
+        }
+    },
     gou(){
         if(localStorage.getItem("token")==null){
             this.$toast('请先登录')
@@ -88,5 +141,7 @@ export default {
 </script>
 <style scoped>
 
-
+.de{
+  margin-bottom:50px;
+}
 </style>

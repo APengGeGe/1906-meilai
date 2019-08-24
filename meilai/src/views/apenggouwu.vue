@@ -22,30 +22,25 @@
         </van-card>
       </div>
 
-        <div>
-            <van-goods-action>
+
+            <van-goods-action class="mai">
                 <van-goods-action-icon
                   icon="chat-o"
                   text="客服"
-                  @click="onClickIcon"
+                  @click="tt()"
                 />
+
                 <van-goods-action-icon
-                  icon="cart-o"
-                  text="购物车"
-                  @click="onClickIcon"
+                  icon="shop-o"
+                  text="店铺"
                 />
-                <van-goods-action-button
-                  type="warning"
-                  text="加入购物车"
-                  @click="onClickButton"
-                />
+
                 <van-goods-action-button
                   type="danger"
                   text="立即购买"
-                  @click="onClickButton"
                 />
               </van-goods-action>
-        </div>
+
   </div>
 </template>
 
@@ -62,6 +57,9 @@ export default {
     }
   },
   methods:{
+    tt(){
+      this.$router.push("/apengkefu")
+    },
       onClickIcon() {
         Toast('点击图标');
       },
@@ -96,7 +94,7 @@ export default {
 
       this.list = data.data.info
       console.log(this.list )
-    })
+  })
   }
 }
 
@@ -104,6 +102,9 @@ export default {
 <style scoped>
 
 #top{
+
+}
+.mai{
   margin-bottom:50px
 }
 </style>

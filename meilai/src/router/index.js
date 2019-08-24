@@ -11,9 +11,17 @@ import Gou from '@/views/apenggouwu'
 import Wo from '@/views/apengwode'
 import De from '@/views/apengdetail'
 import Suo from '@/views/apengshousuo'
+import Ke from '@/views/apengkefu'
+import Xiao from '@/views/apengxiaoxi'
+import Chang from '@/views/changjian/changj'
+import Mei from '@/views/changjian/meiri'
+import Fu from '@/views/changjian/kefu'
+import Youh from '@/views/youhui/apengyouhui'
+import Shi from '@/views/youhui/apengshixiao'
+
 Vue.use(Router)
 
-export default new Router({
+const router= new Router({
   routes: [
     {
       path: '/',
@@ -34,6 +42,40 @@ export default new Router({
     {
       path: '/apengshousuo',
       component:Suo
+    },
+    {
+      path: '/apengxiaoxi',
+      component:Xiao
+    },
+    {
+      path: '/apengyouhui',
+      component:Youh
+    },
+    {
+      path: '/apengshixiao',
+      component:Shi
+    },
+    {
+      path: '/apengkefu',
+      component:Ke,
+      children:[
+        {
+          path: '/changj',
+          component:Chang
+        },
+        {
+          path: '/meiri',
+          component:Mei
+        },
+        {
+          path: '/kefu',
+          component:Fu
+        },
+        {
+          path: '/apengkefu',
+          component:Fu
+        }
+      ]
     },
     {
       path: '/apengshouye',
@@ -68,3 +110,27 @@ export default new Router({
     }
   ]
 })
+
+
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
+
+router.beforeEach((to, from, next) => {
+  //nprogress
+  NProgress.start()
+  if(to.meta.title){
+    document.title = to.meta.title
+  }
+  next()
+
+})
+
+router.afterEach(() => {
+  NProgress.done()
+})
+
+
+
+export default router;
+
