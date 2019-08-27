@@ -113,9 +113,8 @@ export default {
       url:"http://106.12.52.107:8081/MeledMall/shopCar/showShopCar",
       params:{uid:uid}
     }).then((data)=>{
-
       this.list = data.data.info
-console.log(this.list)
+
        this.list.map((item)=>{
          if(_this.addValue <1){
            _this.addValue =1
