@@ -23,14 +23,9 @@
             :thumb="item.photo"
             @click="tep(item.id)"
           />
-
       </van-tab>
-
     </van-tabs>
     </div>
-
-
-
   </div>
 </template>
 

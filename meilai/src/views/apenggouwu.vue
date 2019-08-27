@@ -1,6 +1,6 @@
 <template>
-  <div id="top">
-      <div>
+  <div >
+      <div id="top">
         <van-card
          v-for="(item,i) in list"
         :key="i"
@@ -11,9 +11,9 @@
         >
           <div slot="tags">
             <van-tag plain type="danger"></van-tag>
-            <div slot="footer">
-                <van-stepper v-model="addValue" />
-          </div>
+
+            <van-stepper v-model="item.mnum" :plus="jia(item.id,item.mnum,item.uid)" :minus="jian(item.id)"/>
+
           </div>
           <div slot="footer">
             <van-button size="mini" >购买支付</van-button>
@@ -29,15 +29,15 @@
                   text="客服"
                   @click="tt()"
                 />
-
                 <van-goods-action-icon
                   icon="shop-o"
                   text="店铺"
                 />
-
+                <div>{{gou}}</div>
                 <van-goods-action-button
                   type="danger"
                   text="立即购买"
+                  @click="mai()"
                 />
               </van-goods-action>
 
@@ -52,11 +52,25 @@ export default {
   data(){
     return{
       list:[],
-      addValue:'',
-
+      gou:0
     }
   },
   methods:{
+    jia(id,mnum,uid){
+      console.log(mnum)
+      axios({
+        method:"post",
+        url:"http://106.12.52.107:8081/MeledMall/shopCar/editMnum",
+        data:{uid:uid,mid:id,mnum:mnum}
+      }).then((data)=>{
+        // console.log(data)
+        console.log()
+      })
+
+    },
+    jian(id){
+      // console.log("111")
+    },
     tt(){
       this.$router.push("/apengkefu")
     },
@@ -66,9 +80,17 @@ export default {
       onClickButton() {
         Toast('点击按钮');
       },
-
+      mai(){
+          axios({
+            method:"post",
+            url:'http://106.12.52.107:8081/MeledMall/order/selectOrder',
+            params:{订单状态:"待付款"}
+          }).then((data)=>{
+            console.log(data)
+          })
+      },
       shan(id){
-        console.log(id)
+        // console.log(id)
         let uid = localStorage.getItem("token")
         axios({
           method:"post",
@@ -84,7 +106,7 @@ export default {
       }
   },
   mounted() {
-
+    var _this = this
     let uid = localStorage.getItem("token")
     axios({
       method:"post",
@@ -93,7 +115,18 @@ export default {
     }).then((data)=>{
 
       this.list = data.data.info
-      console.log(this.list )
+console.log(this.list)
+       this.list.map((item)=>{
+         if(_this.addValue <1){
+           _this.addValue =1
+         }else{
+
+         _this.gou+= parseInt(item.mnum *item.mprice)
+         console.log(item.mnum *item.mprice)
+         }
+
+       })
+
   })
   }
 }
@@ -102,9 +135,10 @@ export default {
 <style scoped>
 
 #top{
-
+  margin-bottom:50px;
 }
 .mai{
+
   margin-bottom:50px
 }
 </style>

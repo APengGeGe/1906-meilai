@@ -105,7 +105,6 @@ export default {
   margin-top:50px;
   margin-bottom:50px;
   overflow:auto;
-
 }
 .ic{
   font-size:25px;
